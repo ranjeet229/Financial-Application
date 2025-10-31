@@ -3,6 +3,7 @@ package com.example.financialapp.Activities.ReportActvity.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.financialapp.R
 
-
 @Composable
 fun GradientHeader(modifier: Modifier = Modifier, onBack: () -> Unit) {
     ConstraintLayout(
@@ -35,16 +35,18 @@ fun GradientHeader(modifier: Modifier = Modifier, onBack: () -> Unit) {
                 ),
                 shape = RoundedCornerShape(bottomStart = 30.dp, bottomEnd = 30.dp)
             )
+            .padding(top = 40.dp) // manually add top padding instead of statusBarsPadding()
     ) {
         val (backBtn, title) = createRefs()
+
         IconButton(
             onClick = onBack,
             modifier = Modifier
                 .size(48.dp)
-                .padding(16.dp)
+                .padding(start = 16.dp)
                 .constrainAs(backBtn) {
-                    start.linkTo(parent.start, margin = 16.dp)
-                    top.linkTo(parent.top, margin = 16.dp)
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
                 }
         ) {
             Icon(
@@ -53,13 +55,15 @@ fun GradientHeader(modifier: Modifier = Modifier, onBack: () -> Unit) {
                 tint = Color.White
             )
         }
+
         Text(
             "Monthly Report",
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 19.sp,
-            modifier= Modifier
-                .constrainAs(title){
+            modifier = Modifier
+                .padding(start = 8.dp)
+                .constrainAs(title) {
                     start.linkTo(backBtn.end)
                     top.linkTo(backBtn.top)
                     bottom.linkTo(backBtn.bottom)

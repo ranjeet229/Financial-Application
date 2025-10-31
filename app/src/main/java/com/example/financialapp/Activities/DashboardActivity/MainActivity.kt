@@ -1,5 +1,6 @@
 package com.example.financialapp.Activities.DashboardActivity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.financialapp.Activities.DashboardActivity.screens.MainScreen
+import com.example.financialapp.Activities.ReportActvity.ReportActivity
 import com.example.financialapp.ViewModel.MainViewModal
 import com.example.financialapp.ui.theme.FinancialAppTheme
 
@@ -24,7 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FinancialAppTheme {
                 MainScreen(expenses = mainViewModel.loadData(), onCardClick = {
-
+                    startActivity(Intent(this, ReportActivity::class.java))
                 })
             }
         }
