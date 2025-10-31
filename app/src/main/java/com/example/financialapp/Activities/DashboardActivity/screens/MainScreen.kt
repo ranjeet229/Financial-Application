@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,29 +14,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.financialapp.Activities.DashboardActivity.components.ActionButtonRow
 import com.example.financialapp.Activities.DashboardActivity.components.CardSection
+import com.example.financialapp.Activities.DashboardActivity.components.ExpenseItem
 import com.example.financialapp.Activities.DashboardActivity.components.HeaderSection
 import com.example.financialapp.Domain.ExpenseDomain
+import kotlin.math.exp
 
 @Composable
 @Preview(showBackground = true)
-fun MainScreenPreview(){
-    val expenses= listOf(
-        ExpenseDomain("Resturant", 573.12, "img1", "20 jun 2025 20:20"),
-        ExpenseDomain("KFC", 600.1, "img2", "18 jul 2025 10:23"),
-        ExpenseDomain("McDonald", 73.13, "img3", "30 aug 2025 2:26"),
-        ExpenseDomain("Cinema", 57.12, "img4", "30 oct 2025 17:18")
+fun MainScreenPreview() {
+    val expenses = listOf(
+        ExpenseDomain("Resturant", 573.12, "resturant", "20 jun 2025 20:20"),
+        ExpenseDomain("McDonald", 600.1, "mcdonald", "18 jul 2025 10:23"),
+        ExpenseDomain("Cinema", 73.13, "cinema", "30 aug 2025 2:26"),
+        ExpenseDomain("Resturant", 57.12, "resturant", "30 oct 2025 17:18")
     )
-     MainScreen(expenses = expenses)
+    MainScreen(expenses = expenses)
 }
 
 @Composable
 fun MainScreen(
-    onCardClick: ()-> Unit={},
+    onCardClick: () -> Unit = {},
     expenses: List<ExpenseDomain>
-){
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.White)){
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -44,8 +49,9 @@ fun MainScreen(
 
         ) {
             item { HeaderSection() }
-            item { CardSection (onCardClick) }
+            item { CardSection(onCardClick) }
             item { ActionButtonRow() }
+            items(items = expenses) {item ->  ExpenseItem(item) }
         }
     }
 }
